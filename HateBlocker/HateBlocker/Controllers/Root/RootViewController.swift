@@ -31,6 +31,7 @@ private extension RootViewController {
     func setupDependencies() {
         let firebase = FirebaseManager()
         let postsManager = PostsManager(firebase: firebase)
-        dependencies = AppDependency(firebaseManager: firebase, postsManager: postsManager)
+        let nlpManager = NLPManager()
+        dependencies = AppDependency(firebaseManager: firebase, postsManager: postsManager, nlpManager: nlpManager)
     }
 }

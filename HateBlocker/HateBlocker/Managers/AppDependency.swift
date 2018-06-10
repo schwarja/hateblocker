@@ -11,4 +11,5 @@ import Foundation
 struct AppDependency {
     let firebaseManager: FirebaseManager
     let postsManager: PostsManager
+    let nlpManager: NLPManager
 }

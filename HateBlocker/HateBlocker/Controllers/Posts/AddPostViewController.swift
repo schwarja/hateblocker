@@ -9,10 +9,10 @@
 import UIKit
 
 struct AddPostDependency {
-    
+    let nlpManager: NLPManager
 }
 
-class AddPostViewController: HBViewController<AddPostDependency> {
+class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDelegate {
     private var nameTextField: UITextField!
     private var textView: UITextView!
     
@@ -30,8 +30,9 @@ class AddPostViewController: HBViewController<AddPostDependency> {
         textView = UITextView()
         textView.clipsToBounds = true
         textView.layer.borderWidth = 0.5
-        textView.layer.borderColor = UIColor.black.cgColor
+        textView.layer.borderColor = UIColor.gray.cgColor
         textView.font = UIFont.systemFont(ofSize: 17)
+        textView.delegate = self
         view.addSubview(textView)
         
         nameTextField.attachToSafeArea(left: 24, top: 16, right: 24)
@@ -48,5 +49,16 @@ class AddPostViewController: HBViewController<AddPostDependency> {
             name = "<NONAME>"
         }
         didCreatePost(withName: name, text: textView.text, sender: self)
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let text = textView.text ?? ""
+        let ranges = dependency.nlpManager.hatefulRanges(in: text)
+        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 17)])
+        for range in ranges {
+            let nsRange = NSRange(range, in: text)
+            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
+        }
+        textView.attributedText = attributedString
     }
 }

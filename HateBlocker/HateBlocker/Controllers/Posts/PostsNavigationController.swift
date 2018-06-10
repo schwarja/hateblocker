@@ -16,7 +16,7 @@ class PostsNavigationController: HBNavigationController {
     }
     
     override func didTapOnAddPost(sender: Any?) {
-        let controller = AddPostViewController(dependency: AddPostDependency())
+        let controller = AddPostViewController(dependency: AddPostDependency(nlpManager: dependencies.nlpManager))
         pushViewController(controller, animated: true)
     }
     
