@@ -20,6 +20,7 @@ class PostsController: HBViewController<PostsControllerDependecy>, ContainerCont
         
         navigationItem.title = "Posts"
         navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(self.addPostTapped))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Remove All", style: .plain, target: self, action: #selector(self.deletePostsTapped))
 
         let controller = PostsContentViewController(dependency: contentDependency)
         embed(controller: controller)
@@ -39,6 +40,10 @@ class PostsController: HBViewController<PostsControllerDependecy>, ContainerCont
     
     @objc func addPostTapped() {
         didTapOnAddPost(sender: self)
+    }
+    
+    @objc func deletePostsTapped() {
+        dependency.postsManager.deletePosts()
     }
 }
 

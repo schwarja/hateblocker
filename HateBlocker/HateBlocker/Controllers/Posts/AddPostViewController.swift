@@ -15,12 +15,19 @@ struct AddPostDependency {
 class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDelegate {
     private var nameTextField: UITextField!
     private var textView: UITextView!
+    private var doneButton: UIBarButtonItem!
+    
+    var doneButtonEnabled: Bool {
+        return !(nameTextField.text?.isEmpty ?? true) && !(textView.text?.isEmpty ?? true)
+    }
     
     override func setup() {
         view.backgroundColor = .white
         
+        doneButton = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped))
+        doneButton.isEnabled = false
         navigationItem.title = "Add post"
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .done, target: self, action: #selector(self.doneButtonTapped))
+        navigationItem.rightBarButtonItem = doneButton
         
         nameTextField = UITextField()
         nameTextField.placeholder = "Your name"
@@ -41,18 +48,24 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
     }
     
     @objc func doneButtonTapped() {
-        let name: String
-        if let text = nameTextField.text, !text.isEmpty {
-            name = text
+        let text = textView.text ?? ""
+        let hateClass = dependency.nlpManager.evaluate(text: text)
+        
+        switch hateClass {
+        case .some(.hateful):
+            presentDenialAlert(withMessage: "Your message is too hateful")
+        case .some(.offensive):
+            presentDenialAlert(withMessage: "Your message is too offensive")
+        default:
+            didCreatePost(withName: nameTextField.text ?? "", text: text, sender: self)
         }
-        else {
-            name = "<NONAME>"
-        }
-        didCreatePost(withName: name, text: textView.text, sender: self)
     }
     
     func textViewDidChange(_ textView: UITextView) {
         let text = textView.text ?? ""
+        
+        doneButton.isEnabled = doneButtonEnabled
+        
         let ranges = dependency.nlpManager.hatefulRanges(in: text)
         let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 17)])
         for range in ranges {
@@ -60,5 +73,13 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
             attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
         }
         textView.attributedText = attributedString
+    }
+}
+
+private extension AddPostViewController {
+    func presentDenialAlert(withMessage message: String) {
+        let alert = UIAlertController(title: "Denied", message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "OK", style: .cancel, handler: nil))
+        present(alert, animated: true, completion: nil)
     }
 }

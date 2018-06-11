@@ -33,6 +33,10 @@ class PostsManager {
         let post = Post(author: name, text: text)
         firebase.write(object: post, atPath: .posts)
     }
+    
+    func deletePosts() {
+        firebase.delete(path: .posts)
+    }
 }
 
 private extension PostsManager {

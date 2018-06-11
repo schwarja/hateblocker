@@ -86,4 +86,8 @@ class FirebaseManager {
             }
         }
     }
+    
+    func delete(path: FirebasePath) {
+        reference.child(path.rawValue).removeValue()
+    }
 }

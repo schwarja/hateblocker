@@ -10,11 +10,22 @@ import Foundation
 import NaturalLanguage
 
 class NLPManager {
+    enum HateClass: String {
+        case correct
+        case offensive
+        case hateful
+    }
+    
     private let hatefulLemmas: [NLLanguage: [String]] = [
         .english: ["hate"],
         .german: ["hassen"]
     ]
     
+    private lazy var classifier: NLModel = {
+        let url = Bundle.main.url(forResource: "HatredModel", withExtension: "mlmodelc")!
+        return try! NLModel(contentsOf: url)
+    }()
+
     func hatefulRanges(in text: String) -> [Range<String.Index>] {
         let languageRecognizer = NLLanguageRecognizer()
         languageRecognizer.processString(text)
@@ -29,5 +40,14 @@ class NLPManager {
         tagger.setLanguage(language, range: range)
         let tags = tagger.tags(in: range, unit: .word, scheme: .lemma, options: [.omitWhitespace, .omitPunctuation])
         return tags.filter({ lemmas.contains($0.0?.rawValue ?? "") }).map{ $0.1 }
+    }
+    
+    func evaluate(text: String) -> HateClass? {
+        if let prediction = classifier.predictedLabel(for: text),
+            let hateClass = HateClass(rawValue: prediction) {
+            return hateClass
+        }
+
+        return nil
     }
 }
