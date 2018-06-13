@@ -61,7 +61,6 @@ private extension PostsManager {
     
     func managerUpdated() {
         DispatchQueue.main.async {
-            print(self.posts)
             self.delegate?.postsManagerDidUpdate(self)
         }
     }

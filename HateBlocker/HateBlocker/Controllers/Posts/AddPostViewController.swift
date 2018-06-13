@@ -18,7 +18,15 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
     private var doneButton: UIBarButtonItem!
     
     var doneButtonEnabled: Bool {
-        return !(nameTextField.text?.isEmpty ?? true) && !(textView.text?.isEmpty ?? true)
+        return !(textView.text?.isEmpty ?? true)
+    }
+    var name: String {
+        if nameTextField.text?.isEmpty ?? true {
+            return "Jan"
+        }
+        else {
+            return nameTextField.text ?? ""
+        }
     }
     
     override func setup() {
@@ -57,7 +65,7 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
         case .some(.offensive):
             presentDenialAlert(withMessage: "Your message is too offensive")
         default:
-            didCreatePost(withName: nameTextField.text ?? "", text: text, sender: self)
+            didCreatePost(withName: name, text: text, sender: self)
         }
     }
     

@@ -36,6 +36,7 @@ class PostCell: HBTableViewCell {
         addSubview(nameLabel)
         
         titleLabel = UILabel()
+        titleLabel.numberOfLines = 0
         addSubview(titleLabel)
         
         timeLabel.attach(left: 16, top: 8, right: 8)
