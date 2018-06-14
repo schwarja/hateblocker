@@ -40,13 +40,14 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
         nameTextField = UITextField()
         nameTextField.placeholder = "Your name"
         nameTextField.borderStyle = .roundedRect
+        nameTextField.font = UIFont.systemFont(ofSize: 24)
         view.addSubview(nameTextField)
         
         textView = UITextView()
         textView.clipsToBounds = true
         textView.layer.borderWidth = 0.5
         textView.layer.borderColor = UIColor.gray.cgColor
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = UIFont.systemFont(ofSize: 24)
         textView.delegate = self
         view.addSubview(textView)
         

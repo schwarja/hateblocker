@@ -33,10 +33,12 @@ class PostCell: HBTableViewCell {
         addSubview(timeLabel)
         
         nameLabel = UILabel()
+        nameLabel.font = UIFont.systemFont(ofSize: 24)
         addSubview(nameLabel)
         
         titleLabel = UILabel()
         titleLabel.numberOfLines = 0
+        titleLabel.font = UIFont.systemFont(ofSize: 24)
         addSubview(titleLabel)
         
         timeLabel.attach(left: 16, top: 8, right: 8)
