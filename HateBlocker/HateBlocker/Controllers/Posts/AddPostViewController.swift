@@ -81,7 +81,7 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
 //        let text = textView.text ?? ""
 //
 //        let ranges = dependency.nlpManager.hatefulRanges(in: text)
-//        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 17)])
+//        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 24)])
 //        for range in ranges {
 //            let nsRange = NSRange(range, in: text)
 //            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
