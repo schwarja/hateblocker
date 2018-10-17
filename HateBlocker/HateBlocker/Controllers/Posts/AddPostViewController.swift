@@ -58,10 +58,6 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
     
     @objc func doneButtonTapped() {
         let text = textView.text ?? ""
-        guard false else {
-            didCreatePost(withName: name, text: text, sender: self)
-            return
-        }
         
         let hateClass = dependency.nlpManager.evaluate(text: text)
         
@@ -78,15 +74,15 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
     func textViewDidChange(_ textView: UITextView) {
         doneButton.isEnabled = doneButtonEnabled
         
-//        let text = textView.text ?? ""
-//
-//        let ranges = dependency.nlpManager.hatefulRanges(in: text)
-//        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 24)])
-//        for range in ranges {
-//            let nsRange = NSRange(range, in: text)
-//            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
-//        }
-//        textView.attributedText = attributedString
+        let text = textView.text ?? ""
+
+        let ranges = dependency.nlpManager.hatefulRanges(in: text)
+        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 24)])
+        for range in ranges {
+            let nsRange = NSRange(range, in: text)
+            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
+        }
+        textView.attributedText = attributedString
     }
 }
 
