@@ -10,4 +10,4 @@ let algorithm = MLTextClassifier.ModelAlgorithmType.maxEnt(revision: 1)
 let parameters = MLTextClassifier.ModelParameters(validationData: [:], algorithm: algorithm, language: .english)
 let model = try MLTextClassifier(trainingData: data, textColumn: "text", labelColumn: "label", parameters: parameters)
 
-try model.write(to: URL(fileURLWithPath: "/Users/strv/Desktop/HatredModel-MaxEnt.mlmodel"))
+try model.write(to: URL(fileURLWithPath: "/Users/janschwarz1/Desktop/HatredModel-MaxEnt.mlmodel"))
