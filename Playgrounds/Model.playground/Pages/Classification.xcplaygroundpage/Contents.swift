@@ -8,8 +8,9 @@ enum HateClass: String {
     case hateful
 }
 
-// Load a classification model from a file
-let url = Bundle.main.url(forResource: "HatredModel", withExtension: "mlmodelc")!
+// Compile mlmodel file to mlmodelc filesystem structure
+let url = try! MLModel.compileModel(at: Model.url)
+// Load a classification model from a mlmodelc directory
 let classifier = try! NLModel(contentsOf: url)
 
 

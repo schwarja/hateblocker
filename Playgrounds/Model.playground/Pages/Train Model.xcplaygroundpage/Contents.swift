@@ -1,7 +1,6 @@
 import Foundation
 import CreateML
 import NaturalLanguage
-import PlaygroundSupport
 
 // Constants
 struct TrainingData {
@@ -13,15 +12,17 @@ struct TrainingData {
 // Load training data
 let data = try MLDataTable(contentsOf: TrainingData.url)
 
-// Split data into 3 sets: training, validation and testing
+// Split data into training and testing datasets
 let (extendedTrainingData, testingData) = data.randomSplit(by: 0.9, seed: 1)
 
+// Array of models with their errors
 var models: [(error: Double, model: MLTextClassifier)] = []
 for seed in 0..<10 {
+    // Split training data into real training dataset and validation dataset
     let (trainingData, validationData) = extendedTrainingData.randomSplit(by: 0.9, seed: seed)
     
     // Choose between maximum entropy and conditional random fields
-    let algorithm = MLTextClassifier.ModelAlgorithmType.maxEnt(revision: nil)
+    let algorithm = MLTextClassifier.ModelAlgorithmType.maxEnt(revision: 1)
     
     // Specify training algorithm parameters
     let parameters = MLTextClassifier.ModelParameters(validationData: validationData, algorithm: algorithm, language: .english)
@@ -33,14 +34,15 @@ for seed in 0..<10 {
         labelColumn: TrainingData.labelColumnName,
         parameters: parameters)
     
+    // Evaluate the trained model
     let evaluation = model.evaluation(on: testingData)
     print(evaluation)
     
+    // Append trained model to the array of models
     models.append((evaluation.classificationError, model))
 }
 
-// Write the model to url
+// Write the best model to url
 if let model = models.sorted(by: { $0.error < $1.error }).first {
-    print(model.error)
-    try model.model.write(to: playgroundSharedDataDirectory.appendingPathComponent("HatredModel.mlmodel"))
+    try model.model.write(to: Model.url)
 }
