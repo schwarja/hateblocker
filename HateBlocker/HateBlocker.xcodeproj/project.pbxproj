@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0E0044F4BC47C7D6CCCDDB28 /* Pods_HateBlocker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 902883BB16FA527832E13BE4 /* Pods_HateBlocker.framework */; };
-		BEF7A75F20CE79AE00096DA1 /* HatredModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = BEF7A75E20CE79AE00096DA1 /* HatredModel.mlmodel */; };
+		C152A7BF220B1ECA005485E4 /* HatredModel.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C152A7BE220B1EC9005485E4 /* HatredModel.mlmodel */; };
 		C1AC904520CD6ACA00D8D9C5 /* InjectableProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AC904420CD6ACA00D8D9C5 /* InjectableProtocol.swift */; };
 		C1AC904720CD6B0900D8D9C5 /* ContainerControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AC904620CD6B0900D8D9C5 /* ContainerControllerProtocol.swift */; };
 		C1AC904B20CD6B3600D8D9C5 /* AppDependency.swift in Sources */ = {isa = PBXBuildFile; fileRef = C1AC904A20CD6B3600D8D9C5 /* AppDependency.swift */; };
@@ -44,7 +44,7 @@
 		5858D2914A4162EF5B7938C7 /* Pods-HateBlocker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HateBlocker.release.xcconfig"; path = "Pods/Target Support Files/Pods-HateBlocker/Pods-HateBlocker.release.xcconfig"; sourceTree = "<group>"; };
 		902883BB16FA527832E13BE4 /* Pods_HateBlocker.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_HateBlocker.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		986693818DBAF84DD9CCA207 /* Pods-HateBlocker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-HateBlocker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-HateBlocker/Pods-HateBlocker.debug.xcconfig"; sourceTree = "<group>"; };
-		BEF7A75E20CE79AE00096DA1 /* HatredModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HatredModel.mlmodel; sourceTree = "<group>"; };
+		C152A7BE220B1EC9005485E4 /* HatredModel.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = HatredModel.mlmodel; sourceTree = "<group>"; };
 		C1AC904420CD6ACA00D8D9C5 /* InjectableProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InjectableProtocol.swift; sourceTree = "<group>"; };
 		C1AC904620CD6B0900D8D9C5 /* ContainerControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContainerControllerProtocol.swift; sourceTree = "<group>"; };
 		C1AC904A20CD6B3600D8D9C5 /* AppDependency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDependency.swift; sourceTree = "<group>"; };
@@ -239,7 +239,7 @@
 			isa = PBXGroup;
 			children = (
 				C1DB54F820CD5C19009A91F9 /* Assets.xcassets */,
-				BEF7A75E20CE79AE00096DA1 /* HatredModel.mlmodel */,
+				C152A7BE220B1EC9005485E4 /* HatredModel.mlmodel */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -404,7 +404,7 @@
 				C1DB550B20CD6954009A91F9 /* FirebaseManager.swift in Sources */,
 				C1AC905420CD6C6C00D8D9C5 /* LayoutSpecifier.swift in Sources */,
 				C1AC905E20CD6E2400D8D9C5 /* HBViewController.swift in Sources */,
-				BEF7A75F20CE79AE00096DA1 /* HatredModel.mlmodel in Sources */,
+				C152A7BF220B1ECA005485E4 /* HatredModel.mlmodel in Sources */,
 				C1AC907D20CD873100D8D9C5 /* AddPostViewController.swift in Sources */,
 				C1AC906620CD711500D8D9C5 /* PostsNavigationController.swift in Sources */,
 				C1AC906E20CD7F8B00D8D9C5 /* ReuseIdentifierProtocol.swift in Sources */,
