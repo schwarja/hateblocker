@@ -59,30 +59,38 @@ class AddPostViewController: HBViewController<AddPostDependency>, UITextViewDele
     @objc func doneButtonTapped() {
         let text = textView.text ?? ""
         
-        let hateClass = dependency.nlpManager.evaluate(text: text)
-        
-        switch hateClass {
-        case .some(.hateful):
-            presentDenialAlert(withMessage: "Your message is too hateful")
-        case .some(.offensive):
-            presentDenialAlert(withMessage: "Your message is too offensive")
-        default:
+        if !text.isEmpty {
             didCreatePost(withName: name, text: text, sender: self)
         }
+        
+        // TODO: 2
+        
+//        let hateClass = dependency.nlpManager.evaluate(text: text)
+//
+//        switch hateClass {
+//        case .some(.hateful):
+//            presentDenialAlert(withMessage: "Your message is too hateful")
+//        case .some(.offensive):
+//            presentDenialAlert(withMessage: "Your message is too offensive")
+//        default:
+//            didCreatePost(withName: name, text: text, sender: self)
+//        }
     }
     
     func textViewDidChange(_ textView: UITextView) {
         doneButton.isEnabled = doneButtonEnabled
         
-        let text = textView.text ?? ""
-
-        let ranges = dependency.nlpManager.hatefulRanges(in: text)
-        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 24)])
-        for range in ranges {
-            let nsRange = NSRange(range, in: text)
-            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
-        }
-        textView.attributedText = attributedString
+        // TODO: 1
+        
+//        let text = textView.text ?? ""
+//
+//        let ranges = dependency.nlpManager.hatefulRanges(in: text)
+//        let attributedString = NSMutableAttributedString(string: text, attributes: [.font: UIFont.systemFont(ofSize: 24)])
+//        for range in ranges {
+//            let nsRange = NSRange(range, in: text)
+//            attributedString.addAttributes([.foregroundColor: UIColor.red], range: nsRange)
+//        }
+//        textView.attributedText = attributedString
     }
 }
 
