@@ -19,7 +19,8 @@ class NLPManager {
     // MARK: NLTagger
     private let hatefulLemmas: [NLLanguage: [String]] = [
         .english: ["hate"],
-        .german: ["hassen"]
+        .german: ["hassen"],
+        .portuguese: ["odiar"]
     ]
     
     func hatefulRanges(in text: String) -> [Range<String.Index>] {
